@@ -1,13 +1,11 @@
+package steps;
 
-
+import avaliacao.Avaliacao;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Quando;
 import io.cucumber.java.pt.Então;
-import io.cucumber.java.pt.E;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-
 
 public class AvaliacaoSteps {
 
@@ -36,18 +34,32 @@ public class AvaliacaoSteps {
 
     @Então("a média deve ser {double}")
     public void verificarMedia(double esperada) {
-        assertNull(erro, "O cálculo não deveria lançar uma exceção.");
+        assertNull(
+            erro,
+            "Não deveria ocorrer erro com notas válidas."
+        );
+
         assertEquals(esperada, media, 0.001);
     }
 
-    @E("a situação deve ser {string}")
+    @Então("a situação deve ser {string}")
     public void verificarSituacao(String esperada) {
-        assertNull(erro, "O cálculo não deveria lançar uma exceção.");
-        assertEquals(esperada, avaliacao.verificarSituacao(media));
+        assertNull(
+            erro,
+            "Não deveria ocorrer erro com notas válidas."
+        );
+
+        assertEquals(
+            esperada,
+            avaliacao.verificarSituacao(media)
+        );
     }
 
     @Então("deve ocorrer um erro de nota inválida")
     public void verificarErro() {
-        assertNotNull(erro, "Deveria lançar IllegalArgumentException.");
+        assertNotNull(
+            erro,
+            "Deveria lançar IllegalArgumentException."
+        );
     }
 }
